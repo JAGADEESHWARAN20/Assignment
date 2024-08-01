@@ -120,38 +120,40 @@ const App = () => {
           />
         </div>
         {selectedPoint && (
-          <div className="edit-point-form">
-            <h2>Edit Point</h2>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                const x = parseFloat(e.target.x.value);
-                const y = parseFloat(e.target.y.value);
-                handleEditPoint({ x, y });
-              }}
-            >
-              <label>
-                X:
-                <input
-                  type="number"
-                  name="x"
-                  defaultValue={selectedPoint.x}
-                  className="p-2 border rounded"
-                />
-              </label>
-              <label>
-                Y:
-                <input
-                  type="number"
-                  name="y"
-                  defaultValue={selectedPoint.y}
-                  className="p-2 border rounded"
-                />
-              </label>
-              <button type="submit" className="p-2 bg-blue-500 text-white rounded">
-                Save
-              </button>
-            </form>
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+            <div className="bg-white p-6 rounded shadow-lg">
+              <h2 className="text-xl font-bold mb-4">Edit Point</h2>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const x = parseFloat(e.target.x.value);
+                  const y = parseFloat(e.target.y.value);
+                  handleEditPoint({ x, y });
+                }}
+              >
+                <label className="block mb-2">
+                  X:
+                  <input
+                    type="number"
+                    name="x"
+                    defaultValue={selectedPoint.x}
+                    className="p-2 border rounded w-full"
+                  />
+                </label>
+                <label className="block mb-4">
+                  Y:
+                  <input
+                    type="number"
+                    name="y"
+                    defaultValue={selectedPoint.y}
+                    className="p-2 border rounded w-full"
+                  />
+                </label>
+                <button type="submit" className="p-2 bg-blue-500 text-white rounded w-full">
+                  Save
+                </button>
+              </form>
+            </div>
           </div>
         )}
       </div>
