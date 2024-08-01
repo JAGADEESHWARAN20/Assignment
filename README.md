@@ -61,5 +61,3 @@ For any questions or issues, please contact:
 Email: Jagadeeshwaransp5@gmail.com
 GitHub: https://github.com/JAGADEESHWARAN20/
 
-
-You can copy this content into a `README.md` file for your project. If you need any adjustments, feel free to let me know!
