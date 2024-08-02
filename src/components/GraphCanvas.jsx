@@ -112,7 +112,7 @@ const GraphCanvas = ({ dataPoints, setDataPoints, graphType, selectedPoint, setS
     };
 
     return (
-        <div ref={drop} className={`graph-canvas ${isOver ? 'bg-gray-200' : ''}`}>
+        <div ref={drop} className={`graph-canvas ${isOver ? 'bg-gray-200 text-white' : 'bg-transparent text-black'}`}>
             {graphType === 'line' && <Line data={data} options={options} />}
             {graphType === 'scatter' && <Scatter data={data} options={options} />}
             {graphType === 'bar' && <Bar data={data} options={options} />}
