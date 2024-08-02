@@ -1,19 +1,14 @@
-// src/components/chart.tsx
-
 import React, { useEffect, useRef } from 'react';
-import { Chart, registerables } from 'chart.js';
-import { Scatter } from 'react-chartjs-2';
+import { Chart } from 'chart.js';
 
-// Register Chart.js components
-Chart.register(...registerables);
-
-const GraphCanvas = ({ dataPoints }) => {
+const ChartComponent = ({ dataPoints }) => {
     const chartRef = useRef(null);
+    const chartInstanceRef = useRef(null);
 
-    useEffect(() => {
+    const createChart = () => {
         if (chartRef.current) {
-            const chartInstance = new Chart(chartRef.current, {
-                type: 'scatter',
+            chartInstanceRef.current = new Chart(chartRef.current, {
+                type: 'line',
                 data: {
                     datasets: [
                         {
@@ -21,35 +16,47 @@ const GraphCanvas = ({ dataPoints }) => {
                             data: dataPoints,
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1,
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                            pointBorderColor: 'rgba(75, 192, 192, 1)',
                         },
                     ],
                 },
                 options: {
-                    scales: {
-                        x: {
-                            type: 'linear',
-                            position: 'bottom',
-                        },
-                        y: {
-                            beginAtZero: true,
-                        },
-                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
                 },
             });
-
-            // Clean up chart instance on component unmount
-            return () => {
-                chartInstance.destroy();
-            };
         }
+    };
+
+    const destroyChart = () => {
+        if (chartInstanceRef.current) {
+            chartInstanceRef.current.destroy();
+        }
+    };
+
+    useEffect(() => {
+        createChart();
+
+        const handleResize = () => {
+            destroyChart();
+            createChart();
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            destroyChart();
+            window.removeEventListener('resize', handleResize);
+        };
     }, [dataPoints]);
 
     return (
-        <div>
+        <div className="chart-container">
             <canvas ref={chartRef}></canvas>
         </div>
     );
 };
 
-export default GraphCanvas;
+export default ChartComponent;

@@ -17,7 +17,7 @@ const DataPoint = ({ point }) => {
     return (
         <div
             ref={drag}
-            className={`p-2 m-2 bg-white border rounded cursor-pointer ${isDragging ? 'opacity-50' : 'opacity-100'}`}
+            className={`p-2 m-2  border rounded cursor-pointer ${isDragging ? 'opacity-50' : 'opacity-100'}`}
         >
             {`(${point.x}, ${point.y})`}
         </div>
